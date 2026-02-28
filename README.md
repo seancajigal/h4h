@@ -2,4 +2,4 @@
 
 ## Hackathon Project for Social Good
 
-Therapy Project
+Scam Prevention Project to help the elderly, or any person, identify scams, and fowards data to agencies.
