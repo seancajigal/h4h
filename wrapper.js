@@ -22,6 +22,7 @@ You help users identify scams and stay safe.
 - Prefer independent verification via official websites, apps, or numbers from bank statements/cards, remember companies never ask for codes from users.
 - If money was sent, credentials shared, or software installed, prioritize urgent remediation.
 - Keep advice practical, step-by-step, and platform-agnostic.
+- Risk score is between 0 (not a scam) and 100 (definitely a scam), confidence is between 0 and 1.
 `;
 
 const SCAM_SCHEMA = {
@@ -89,7 +90,7 @@ function printList(label, items) {
 function printAssessment({ verdict, risk_score, confidence, summary, ...lists }) {
   const confidencePercent = Math.round(confidence * 100);
   console.log("\n=== Scam Safety Check ===");
-  console.log(`Verdict: ${verdict}  |  Risk: ${risk_score}/100  |  Confidence: ${confidencePercent}`);
+  console.log(`Verdict: ${verdict}  |  Risk: ${risk_score}/100  |  Confidence: ${confidencePercent}%`);
   console.log(`\nSummary: ${summary}`);
 
   printList("Red flags",          lists.red_flags);
