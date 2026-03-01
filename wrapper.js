@@ -20,6 +20,8 @@ const EMAIL_PORT  = process.env.PORT || 3000;
 const history = [];
 const MODEL = "gpt-4o-mini";
 
+const OUTPUT_FILE = "output.json"; // single output file, overwritten each time
+
 const SYSTEM_PROMPT = `
 You help users identify scams and stay safe.
 - If key details are missing, use verdict "Unclear" and explain what to verify.
@@ -74,7 +76,7 @@ function pushHistory(role, content) {
 
 // ─── API ──────────────────────────────────────────────────────────────────────
 
-async function assessScam(userText, filename) {
+async function assessScam(userText) {
   pushHistory("user", userText);
 
   const response = await openai.chat.completions.create({
@@ -93,7 +95,7 @@ async function assessScam(userText, filename) {
 
   pushHistory("assistant", `Verdict: ${result.verdict}, risk: ${result.risk_score}. ${result.summary}`);
 
-  saveAssessment(result, userText, filename);
+  saveAssessment(result, userText);
 
   return result;
 }
@@ -161,17 +163,16 @@ function printAssessment({ verdict, risk_score, confidence, summary, ...lists })
   console.log();
 }
 
-function saveAssessment(result, userText, filename = `assessment-${new Date().toISOString().replace(/[:.]/g, "-")}.json`) {
+// Always writes to output.json, overwriting any previous result
+function saveAssessment(result, userText) {
   const output = {
     timestamp: new Date().toISOString(),
     input: userText,
     assessment: result,
   };
 
-  mkdirSync("assessments", { recursive: true });
-  const filepath = join("assessments", filename);
-  writeFileSync(filepath, JSON.stringify(output, null, 2));
-  console.log(chalk.dim(`  Saved to ${filepath}\n`));
+  writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
+  console.log(chalk.dim(`  Saved to ${OUTPUT_FILE}\n`));
 }
 
 // ─── Follow-up loop ───────────────────────────────────────────────────────────
@@ -241,14 +242,13 @@ function startEmailServer() {
       return res.sendStatus(200);
     }
 
-    const text      = `From: ${from}\nSubject: ${subject}\n\n${body}`;
-    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const text = `From: ${from}\nSubject: ${subject}\n\n${body}`;
 
     console.log(chalk.bold.cyan(`\n\n  📧 Email received from ${from}`));
     console.log(chalk.dim(`  Subject: ${subject}\n`));
 
     try {
-      const result = await assessScam(text, `email-${timestamp}.json`);
+      const result = await assessScam(text); // saves to output.json
       printAssessment(result);
     } catch (e) {
       console.error(chalk.red(`\n  Error processing email: ${e?.message ?? e}\n`));
@@ -278,7 +278,7 @@ async function loop() {
 
     try {
       process.stdout.write(chalk.dim("\n  Running assessment...\n"));
-      const result = await assessScam(text);
+      const result = await assessScam(text); // saves to output.json
 
       printAssessment(result);
       await followUpLoop(result);
@@ -297,7 +297,7 @@ if (existsSync(inputFile)) {
 
   if (text) {
     process.stdout.write(chalk.dim("\n  Running assessment from input.txt...\n"));
-    const result = await assessScam(text, "output.json");
+    const result = await assessScam(text); // saves to output.json
     printAssessment(result);
     await followUpLoop(result);
     loop();
