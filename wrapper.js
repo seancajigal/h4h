@@ -18,6 +18,7 @@ const MAX_HISTORY = 8;
 const TEMPERATURE = 0.2;
 const EMAIL_PORT  = process.env.PORT || 3000;
 const history = [];
+const MODEL = "gpt-4o-mini";
 
 const SYSTEM_PROMPT = `
 You help users identify scams and stay safe.
@@ -77,8 +78,8 @@ async function assessScam(userText, filename) {
   pushHistory("user", userText);
 
   const response = await openai.chat.completions.create({
-    model: "gpt-5-nano",
-    //temperature: TEMPERATURE,
+    model: MODEL,
+    temperature: TEMPERATURE,
     messages: [
       { role: "system", content: SYSTEM_PROMPT },
       ...history,
@@ -101,8 +102,8 @@ async function askFollowUp(question, assessmentContext, followUpHistory) {
   followUpHistory.push({ role: "user", content: question });
 
   const response = await openai.chat.completions.create({
-    model: "gpt-5-nano",
-    //temperature: 0.3,
+    model: MODEL,
+    temperature: 0.3,
     messages: [
       { role: "system", content: FOLLOWUP_SYSTEM_PROMPT },
       {
