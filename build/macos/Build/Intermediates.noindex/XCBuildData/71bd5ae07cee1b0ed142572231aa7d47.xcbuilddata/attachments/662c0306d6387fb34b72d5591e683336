@@ -1,0 +1,5 @@
+
+module record_macos.Swift {
+  header "record_macos-Swift.h"
+  requires objc
+}

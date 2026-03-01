@@ -1,0 +1,109 @@
+{
+  "" : {
+    "diagnostics" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/record_macos-primary.dia",
+    "emit-module-dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/record_macos-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/record_macos-primary-emit-module.dia",
+    "pch" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/record_macos-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/record_macos-primary.swiftdeps"
+  },
+  "/Users/Joshua/.pub-cache/hosted/pub.dev/record_macos-1.2.1/macos/record_macos/Sources/record_macos/InputHelper.swift" : {
+    "const-values" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/InputHelper.swiftconstvalues",
+    "dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/InputHelper.d",
+    "diagnostics" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/InputHelper.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/record_macos.build/Objects-normal/arm64/InputHelper.o",
+    "llvm-bc" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/InputHelper.bc",
+    "object" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/InputHelper.o",
+    "swift-dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/InputHelper.swiftdeps",
+    "swiftmodule" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/InputHelper~partial.swiftmodule"
+  },
+  "/Users/Joshua/.pub-cache/hosted/pub.dev/record_macos-1.2.1/macos/record_macos/Sources/record_macos/RecordConfig.swift" : {
+    "const-values" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordConfig.swiftconstvalues",
+    "dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordConfig.d",
+    "diagnostics" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordConfig.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordConfig.o",
+    "llvm-bc" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordConfig.bc",
+    "object" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordConfig.o",
+    "swift-dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordConfig.swiftdeps",
+    "swiftmodule" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordConfig~partial.swiftmodule"
+  },
+  "/Users/Joshua/.pub-cache/hosted/pub.dev/record_macos-1.2.1/macos/record_macos/Sources/record_macos/RecordMacOsPlugin.swift" : {
+    "const-values" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordMacOsPlugin.swiftconstvalues",
+    "dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordMacOsPlugin.d",
+    "diagnostics" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordMacOsPlugin.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordMacOsPlugin.o",
+    "llvm-bc" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordMacOsPlugin.bc",
+    "object" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordMacOsPlugin.o",
+    "swift-dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordMacOsPlugin.swiftdeps",
+    "swiftmodule" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecordMacOsPlugin~partial.swiftmodule"
+  },
+  "/Users/Joshua/.pub-cache/hosted/pub.dev/record_macos-1.2.1/macos/record_macos/Sources/record_macos/Recorder.swift" : {
+    "const-values" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/Recorder.swiftconstvalues",
+    "dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/Recorder.d",
+    "diagnostics" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/Recorder.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/record_macos.build/Objects-normal/arm64/Recorder.o",
+    "llvm-bc" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/Recorder.bc",
+    "object" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/Recorder.o",
+    "swift-dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/Recorder.swiftdeps",
+    "swiftmodule" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/Recorder~partial.swiftmodule"
+  },
+  "/Users/Joshua/.pub-cache/hosted/pub.dev/record_macos-1.2.1/macos/record_macos/Sources/record_macos/delegate/RecorderDelegateProtocols.swift" : {
+    "const-values" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderDelegateProtocols.swiftconstvalues",
+    "dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderDelegateProtocols.d",
+    "diagnostics" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderDelegateProtocols.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderDelegateProtocols.o",
+    "llvm-bc" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderDelegateProtocols.bc",
+    "object" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderDelegateProtocols.o",
+    "swift-dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderDelegateProtocols.swiftdeps",
+    "swiftmodule" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderDelegateProtocols~partial.swiftmodule"
+  },
+  "/Users/Joshua/.pub-cache/hosted/pub.dev/record_macos-1.2.1/macos/record_macos/Sources/record_macos/delegate/RecorderFileDelegate.swift" : {
+    "const-values" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFileDelegate.swiftconstvalues",
+    "dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFileDelegate.d",
+    "diagnostics" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFileDelegate.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFileDelegate.o",
+    "llvm-bc" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFileDelegate.bc",
+    "object" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFileDelegate.o",
+    "swift-dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFileDelegate.swiftdeps",
+    "swiftmodule" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFileDelegate~partial.swiftmodule"
+  },
+  "/Users/Joshua/.pub-cache/hosted/pub.dev/record_macos-1.2.1/macos/record_macos/Sources/record_macos/delegate/RecorderStreamDelegate.swift" : {
+    "const-values" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderStreamDelegate.swiftconstvalues",
+    "dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderStreamDelegate.d",
+    "diagnostics" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderStreamDelegate.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderStreamDelegate.o",
+    "llvm-bc" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderStreamDelegate.bc",
+    "object" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderStreamDelegate.o",
+    "swift-dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderStreamDelegate.swiftdeps",
+    "swiftmodule" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderStreamDelegate~partial.swiftmodule"
+  },
+  "/Users/Joshua/.pub-cache/hosted/pub.dev/record_macos-1.2.1/macos/record_macos/Sources/record_macos/encoder/AacAdtsEncoder.swift" : {
+    "const-values" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/AacAdtsEncoder.swiftconstvalues",
+    "dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/AacAdtsEncoder.d",
+    "diagnostics" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/AacAdtsEncoder.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/record_macos.build/Objects-normal/arm64/AacAdtsEncoder.o",
+    "llvm-bc" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/AacAdtsEncoder.bc",
+    "object" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/AacAdtsEncoder.o",
+    "swift-dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/AacAdtsEncoder.swiftdeps",
+    "swiftmodule" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/AacAdtsEncoder~partial.swiftmodule"
+  },
+  "/Users/Joshua/.pub-cache/hosted/pub.dev/record_macos-1.2.1/macos/record_macos/Sources/record_macos/encoder/EncoderProtocol.swift" : {
+    "const-values" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/EncoderProtocol.swiftconstvalues",
+    "dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/EncoderProtocol.d",
+    "diagnostics" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/EncoderProtocol.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/record_macos.build/Objects-normal/arm64/EncoderProtocol.o",
+    "llvm-bc" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/EncoderProtocol.bc",
+    "object" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/EncoderProtocol.o",
+    "swift-dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/EncoderProtocol.swiftdeps",
+    "swiftmodule" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/EncoderProtocol~partial.swiftmodule"
+  },
+  "/Users/Joshua/.pub-cache/hosted/pub.dev/record_macos-1.2.1/macos/record_macos/Sources/record_macos/extension/RecorderFormatExtension.swift" : {
+    "const-values" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFormatExtension.swiftconstvalues",
+    "dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFormatExtension.d",
+    "diagnostics" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFormatExtension.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFormatExtension.o",
+    "llvm-bc" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFormatExtension.bc",
+    "object" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFormatExtension.o",
+    "swift-dependencies" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFormatExtension.swiftdeps",
+    "swiftmodule" : "/Users/Joshua/PersonalProjects/ACM-Stuff/h4h/build/macos/Build/Intermediates.noindex/Pods.build/Debug/record_macos.build/Objects-normal/arm64/RecorderFormatExtension~partial.swiftmodule"
+  }
+}
