@@ -1,9 +1,9 @@
 import OpenAI from "openai";
 import readline from "node:readline";
 import chalk from "chalk";
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-
+import express from "express";
 
 console.log(chalk.bold.cyan("\n SCAM CHECKER STARTED\n"));
 
@@ -11,11 +11,13 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
+
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const MAX_HISTORY = 8;
-const TEMPERATURE = 0.2;
-const history = [];
+const MAX_HISTORY  = 8;
+const TEMPERATURE  = 0.2;
+const EMAIL_PORT   = process.env.PORT || 3000;
+const history      = [];
 
 const SYSTEM_PROMPT = `
 You help users identify scams and stay safe.
@@ -25,6 +27,10 @@ You help users identify scams and stay safe.
 - If money was sent, credentials shared, or software installed, prioritize urgent remediation.
 - risk_score must be an integer from 0 to 100, not 0 to 10.
 - Keep advice practical, step-by-step, and platform-agnostic.
+- When in doubt, lean toward "Likely a Scam" — it is safer to over-warn than under-warn.
+- Treat ANY mention of remote access software (AnyDesk, TeamViewer, AnyConnect, UltraViewer, etc.) as a critical red flag.
+- The "refund scam" is a known fraud pattern: victim receives fake refund notification, is asked to call a number, then told to install remote access software. Flag this immediately.
+- Unsolicited refund offers combined with any request to install software or share screen = almost certainly a scam.
 `;
 
 const FOLLOWUP_SYSTEM_PROMPT = `
@@ -65,35 +71,14 @@ function pushHistory(role, content) {
   if (history.length > MAX_HISTORY) history.shift();
 }
 
-// ─── Pre-screening ────────────────────────────────────────────────────────────
-
-// Quick cheap check before running the full structured assessment.
-// Returns true if the input looks scam-related, false if it's off-topic.
-async function isScamRelated(text) {
-  const response = await openai.chat.completions.create({
-    model: "gpt-5-nano",
-    //temperature: 0,
-    //max_completion_tokens: 5,
-    messages: [
-      {
-        role: "system",
-        content: `Reply only "yes" or "no". Is this message something a user might want checked for being a scam, phishing, fraud, or social engineering?`,
-      },
-      { role: "user", content: text },
-    ],
-  });
-  const answer = response.choices[0].message.content.trim().toLowerCase();
-  return answer.startsWith("yes");
-}
-
 // ─── API ──────────────────────────────────────────────────────────────────────
 
-async function assessScam(userText) {
+async function assessScam(userText, filename) {
   pushHistory("user", userText);
 
   const response = await openai.chat.completions.create({
     model: "gpt-5-nano",
-    //temperature: TEMPERATURE,
+    temperature: TEMPERATURE,
     messages: [
       { role: "system", content: SYSTEM_PROMPT },
       ...history,
@@ -102,12 +87,10 @@ async function assessScam(userText) {
   });
 
   const result = JSON.parse(response.choices[0].message.content);
-  // Normalise in case the model still returns 0-10
   if (result.risk_score <= 10) result.risk_score *= 10;
 
   pushHistory("assistant", `Verdict: ${result.verdict}, risk: ${result.risk_score}. ${result.summary}`);
-
-  saveAssessment(result, userText);
+  saveAssessment(result, userText, filename);
 
   return result;
 }
@@ -117,13 +100,10 @@ async function askFollowUp(question, assessmentContext, followUpHistory) {
 
   const response = await openai.chat.completions.create({
     model: "gpt-5-nano",
-    //temperature: 0.3,
+    temperature: 0.3,
     messages: [
       { role: "system", content: FOLLOWUP_SYSTEM_PROMPT },
-      {
-        role: "system",
-        content: `Assessment context:\n${assessmentContext}`,
-      },
+      { role: "system", content: `Assessment context:\n${assessmentContext}` },
       ...followUpHistory,
     ],
   });
@@ -138,9 +118,9 @@ async function askFollowUp(question, assessmentContext, followUpHistory) {
 
 function riskBar(score) {
   const filled = Math.round(score / 10);
-  const empty = 10 - filled;
-  const bar = "█".repeat(filled) + "░".repeat(empty);
-  const color = score >= 70 ? chalk.red : score >= 40 ? chalk.yellow : chalk.green;
+  const empty  = 10 - filled;
+  const bar    = "█".repeat(filled) + "░".repeat(empty);
+  const color  = score >= 70 ? chalk.red : score >= 40 ? chalk.yellow : chalk.green;
   return color(`[${bar}] ${score}/100`);
 }
 
@@ -165,28 +145,27 @@ function printAssessment({ verdict, risk_score, confidence, summary, ...lists })
   console.log(`Confidence: ${confidencePercent}%`);
   console.log(`\n${chalk.bold("Summary:")} ${summary}`);
 
-  printList("Red flags",             lists.red_flags,          chalk.red);
-  printList("Green flags",           lists.green_flags,        chalk.green);
-  printList("Safe actions now",      lists.safe_actions_now,   chalk.yellow);
-  printList("What to check next",    lists.what_to_check,      chalk.cyan);
-  printList("Questions to ask yourself", lists.questions_to_ask, chalk.white);
-  printList("Never share",           lists.data_to_never_share, chalk.magenta);
+  printList("Red flags",               lists.red_flags,           chalk.red);
+  printList("Green flags",             lists.green_flags,         chalk.green);
+  printList("Safe actions now",        lists.safe_actions_now,    chalk.yellow);
+  printList("What to check next",      lists.what_to_check,       chalk.cyan);
+  printList("Questions to ask yourself", lists.questions_to_ask,  chalk.white);
+  printList("Never share",             lists.data_to_never_share, chalk.magenta);
 
   console.log();
 }
 
-function saveAssessment(result, userText) {
-  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+function saveAssessment(result, userText, filename = `assessment-${new Date().toISOString().replace(/[:.]/g, "-")}.json`) {
   const output = {
-    timestamp: new Date().toISOString(),
-    input: userText,
+    timestamp:  new Date().toISOString(),
+    input:      userText,
     assessment: result,
   };
 
   mkdirSync("assessments", { recursive: true });
-  const filename = join("assessments", `assessment-${timestamp}.json`);
-  writeFileSync(filename, JSON.stringify(output, null, 2));
-  console.log(chalk.dim(`  Saved to ${filename}\n`));
+  const filepath = join("assessments", filename);
+  writeFileSync(filepath, JSON.stringify(output, null, 2));
+  console.log(chalk.dim(`  Saved to ${filepath}\n`));
 }
 
 // ─── Follow-up loop ───────────────────────────────────────────────────────────
@@ -204,7 +183,7 @@ function buildAssessmentContext(result) {
 }
 
 async function followUpLoop(result) {
-  const context = buildAssessmentContext(result);
+  const context         = buildAssessmentContext(result);
   const followUpHistory = [];
 
   console.log(chalk.dim('  Follow-up mode — ask anything about this result. Type "done" to assess something new.\n'));
@@ -235,7 +214,68 @@ async function followUpLoop(result) {
   });
 }
 
-// ─── Main loop ────────────────────────────────────────────────────────────────
+// ─── Email server ─────────────────────────────────────────────────────────────
+
+function startEmailServer() {
+  const app = express();
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
+  app.post("/inbound", async (req, res) => {
+    const from    = req.body.From    || req.body.from    || "Unknown sender";
+    const subject = req.body.Subject || req.body.subject || "No subject";
+    const body    = req.body.TextBody || req.body.text   || req.body.body || "";
+
+    if (!body.trim()) {
+      console.log(chalk.yellow("\n  Inbound email had no text body, skipping.\n"));
+      return res.sendStatus(200);
+    }
+
+    const text      = `From: ${from}\nSubject: ${subject}\n\n${body}`;
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+
+    console.log(chalk.bold.cyan(`\n  📧 Email received from ${from}`));
+    console.log(chalk.dim(`  Subject: ${subject}\n`));
+
+    try {
+      const result = await assessScam(text, `email-${timestamp}.json`);
+      printAssessment(result);
+    } catch (e) {
+      console.error(chalk.red(`\n  Error processing email: ${e?.message ?? e}\n`));
+    }
+
+    res.sendStatus(200);
+  });
+
+  app.listen(EMAIL_PORT, () => {
+    console.log(chalk.dim(`  📬 Email webhook listening on port ${EMAIL_PORT}`));
+    console.log(chalk.dim(`  Run: ngrok http ${EMAIL_PORT} — then paste the URL into Postmark as your inbound webhook\n`));
+  });
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+
+async function main() {
+  startEmailServer();
+
+  const inputFile = "input.txt";
+
+  if (existsSync(inputFile)) {
+    const text = readFileSync(inputFile, "utf8").trim();
+
+    if (text) {
+      process.stdout.write(chalk.dim("  Running assessment from input.txt...\n"));
+      const result = await assessScam(text, "output.json");
+      printAssessment(result);
+      await followUpLoop(result);
+      loop();
+      return;
+    }
+  }
+
+  console.log(chalk.dim("  No input.txt found, starting interactive mode...\n"));
+  loop();
+}
 
 async function loop() {
   rl.question(chalk.bold("\nPaste a message, link, or situation ('exit' to quit):\n\nYou: "), async (input) => {
@@ -250,7 +290,6 @@ async function loop() {
     try {
       process.stdout.write(chalk.dim("\n  Running assessment...\n"));
       const result = await assessScam(text);
-
       printAssessment(result);
       await followUpLoop(result);
     } catch (e) {
@@ -261,4 +300,4 @@ async function loop() {
   });
 }
 
-loop();
+main();
