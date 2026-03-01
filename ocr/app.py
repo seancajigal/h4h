@@ -31,15 +31,11 @@ def analyze_and_anonymize(input_text):
         "EMAIL_ADDRESS",
         "PHONE_NUMBER",
         "AGE",
-        "NRP",
         # Financial
         "CREDIT_CARD",
         "BANK_ACCOUNT",
-        "IBAN_CODE",
         "US_BANK_NUMBER",
         "US_SSN",
-        "US_ITIN",
-        "CRYPTO",
         # Location
         "LOCATION",
         "US_DRIVER_LICENSE",
@@ -48,18 +44,7 @@ def analyze_and_anonymize(input_text):
         "MEDICAL_LICENSE",
         "US_DEA_NUMBER",
         # Network / Tech
-        "IP_ADDRESS",
-        # IDs / Numbers
-        "UK_NHS",
-        "SG_NRIC_FIN",
-        "AU_ABN",
-        "AU_ACN",
-        "AU_TFN",
-        "AU_MEDICARE",
-        "IN_PAN",
-        "IN_AADHAAR",
-        "IN_PASSPORT",
-        "IN_VOTER",
+        "IP_ADDRESS"
     ],
     language="en"
     )
@@ -99,7 +84,7 @@ def submit():
     anonymized = analyze_and_anonymize(text)
 
     result["output"]["anonymized_text"] = anonymized
-    result["status"] = "ok" 
+    # result["status"] = "ok" 
     return jsonify(result), 200
 
 
