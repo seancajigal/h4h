@@ -3,6 +3,7 @@ import readline from "node:readline";
 import chalk from "chalk";
 import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import express from "express";
 
 
 console.log(chalk.bold.cyan("\n SCAM CHECKER STARTED\n"));
@@ -15,6 +16,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
 
 const MAX_HISTORY = 8;
 const TEMPERATURE = 0.2;
+const EMAIL_PORT  = process.env.PORT || 3000;
 const history = [];
 
 const SYSTEM_PROMPT = `
@@ -196,10 +198,14 @@ async function followUpLoop(result) {
       rl.question(chalk.cyan("  You: "), async (input) => {
         const text = input.trim();
 
-        if (!text) return ask();
-        if (["done", "next", "back", "exit"].includes(text.toLowerCase())) {
-          console.log();
-          return resolve();
+        if (text.toLowerCase() === "exit") {
+            console.log(chalk.dim("\nGoodbye. Stay safe!\n"));
+            rl.close();
+            process.exit(0);
+        }
+        if (["done", "next", "back"].includes(text.toLowerCase())) {
+            console.log();
+            return resolve();
         }
 
         try {
@@ -217,7 +223,46 @@ async function followUpLoop(result) {
   });
 }
 
+// ─── Email server ─────────────────────────────────────────────────────────────
+
+function startEmailServer() {
+  const app = express();
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
+  app.post("/inbound", async (req, res) => {
+    const from    = req.body.From     || "Unknown sender";
+    const subject = req.body.Subject  || "No subject";
+    const body    = req.body.TextBody || "";
+
+    if (!body.trim()) {
+      console.log(chalk.yellow("\n\n  Inbound email had no text body, skipping.\n\n"));
+      return res.sendStatus(200);
+    }
+
+    const text      = `From: ${from}\nSubject: ${subject}\n\n${body}`;
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+
+    console.log(chalk.bold.cyan(`\n\n  📧 Email received from ${from}`));
+    console.log(chalk.dim(`  Subject: ${subject}\n`));
+
+    try {
+      const result = await assessScam(text, `email-${timestamp}.json`);
+      printAssessment(result);
+    } catch (e) {
+      console.error(chalk.red(`\n  Error processing email: ${e?.message ?? e}\n`));
+    }
+
+    res.sendStatus(200);
+  });
+
+  app.listen(EMAIL_PORT);
+}
+
 // ─── Main loop ────────────────────────────────────────────────────────────────
+
+console.log(chalk.dim(`  📬 Email webhook listening on port ${EMAIL_PORT}`));
+startEmailServer();
 
 async function loop() {
   rl.question(chalk.bold("\nPaste a message, link, or situation ('exit' to quit):\n\nYou: "), async (input) => {
@@ -225,8 +270,9 @@ async function loop() {
 
     if (!text) return loop();
     if (text.toLowerCase() === "exit") {
-      console.log(chalk.dim("\nGoodbye. Stay safe!\n"));
-      return rl.close();
+        console.log(chalk.dim("\nGoodbye. Stay safe!\n"));
+        rl.close();
+        process.exit(0);
     }
 
     try {
@@ -249,13 +295,16 @@ if (existsSync(inputFile)) {
   const text = readFileSync(inputFile, "utf8").trim();
 
   if (text) {
-    process.stdout.write(chalk.dim("\n  Running assessment...\n"));
+    process.stdout.write(chalk.dim("\n  Running assessment from input.txt...\n"));
     const result = await assessScam(text, "output.json");
     printAssessment(result);
     await followUpLoop(result);
     loop();
+  } else {
+    console.log(chalk.dim("  input.txt is empty, starting interactive mode...\n"));
+    loop();
   }
+} else {
+  console.log(chalk.dim("  No input.txt found, starting interactive mode...\n"));
+  loop();
 }
-
-console.log(chalk.dim("  No input.txt found, starting interactive mode...\n"));
-loop();
