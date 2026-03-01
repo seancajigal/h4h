@@ -15,7 +15,6 @@ def ocr(image_path, language="en"):
 
     return results
 
-
 def analyze_and_anonymize(input_text):
     from presidio_analyzer import AnalyzerEngine
     from presidio_anonymizer import AnonymizerEngine   
