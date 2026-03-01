@@ -1,0 +1,41 @@
+{
+  "verdict": "Likely a Scam",
+  "risk_score": 92,
+  "confidence": 0.85,
+  "summary": "Unsolicited refund offers combined with a request to install remote access software (AnyDesk) are a well-known scam pattern. This is highly suspicious and could be an attempt to gain access to your device or personal information. Do not install AnyDesk or share credentials. Verify any refund through official channels rather than responding to the email or phone number in it.",
+  "red_flags": [
+    "Unsolicited refund offer",
+    "Request to install remote access software (AnyDesk)",
+    "Pressure to act quickly",
+    "Possible phishing or impersonation of a company/bank",
+    "Instructions to call a number or install software from the message"
+  ],
+  "green_flags": [],
+  "what_to_check": [
+    "Verify the refund through official, independent channels (merchant's official website or customer service, or your bank/card issuer).",
+    "Check the sender's email domain and headers for spoofing or mismatch with the legitimate company domain.",
+    "Review recent transactions in your bank/credit card statements to confirm whether a refund is actually pending or if there are unauthorized charges.",
+    "Use a known, official contact method (e.g., the contact info on your statement or the merchant’s official app/site) to confirm any refund request."
+  ],
+  "safe_actions_now": [
+    "Do not download or install AnyDesk or any remote-access software.",
+    "Do not call phone numbers or click links in the suspicious email/message.",
+    "Do not share passwords, one-time codes, or other security credentials.",
+    "Check your official bank statements and transaction history for any charges or refunds; contact your bank if you see anything unfamiliar.",
+    "If you have already installed AnyDesk or shared any credentials, immediately uninstall the software, disconnect from the internet, and contact your bank or credit card issuer to report potential fraud; run a security scan.",
+    "Reach out to the merchant or service provider using official channels (official website or customer support number from your statement) to verify any refund claim.",
+    "If you suspect fraud, report it to your bank and relevant consumer protection authorities; keep records of all communications."
+  ],
+  "questions_to_ask": [
+    "What is the exact company name and the official refund policy?",
+    "What is the transaction ID or reference for this supposed refund?",
+    "Can you provide a verifiable link or official contact method to confirm this refund (not a number from the email)?"
+  ],
+  "data_to_never_share": [
+    "Passwords, PINs, full card numbers, or CVV",
+    "One-time security codes (OTP)",
+    "Remote-access credentials or AnyDesk/TeamViewer session details",
+    "Bank login credentials or answers to security questions",
+    "Any other personal data beyond what is necessary for identity verification"
+  ]
+}
