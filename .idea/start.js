@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html>
+<body>
+
 function MyButton() {
   return (
     <button>
@@ -9,7 +13,7 @@ function MyButton() {
 export default function MyApp() {
   return (
     <div>
-      <h1>Welcome to the EmailScams app!</h1>
+      <h1>Welcome to the Old People Safety app!</h1>
       <MyButton />
     </div>
   );
@@ -20,3 +24,6 @@ export default function MyApp() {
   		console.log("User clicked no.");
 	}
 }
+
+</body>
+</html>
