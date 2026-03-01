@@ -118,6 +118,7 @@ class _ConversationScreenState extends State<ConversationScreen>
   // ── mic level for waveform ─────────────────────────────────────────────
   double _micLevel = 0.0;
   final List<double> _waveformHistory = List.filled(40, 0.0);
+  int _waveformIndex = 0;
 
   @override
   void initState() {
@@ -282,6 +283,7 @@ class _ConversationScreenState extends State<ConversationScreen>
           numChannels: 1,
           echoCancel: true,
           noiseSuppress: true,
+          // Add if supported: bitRate: 256000,  // Forces larger buffers
         ),
       );
 
@@ -295,6 +297,17 @@ class _ConversationScreenState extends State<ConversationScreen>
         }
 
         // Compute mic level for visualization
+        _updateMicLevel(bytes);
+      });
+
+      // In _startRecording(), add debug chunk size
+      _micSub = stream.listen((List<int> data) {
+        debugPrint('Sending audio chunk: ${data.length} bytes');  // Should ~8192 bytes (256ms)
+        final bytes = Uint8List.fromList(data);
+        if (_channel != null && _isConnected) {
+          final b64 = base64Encode(bytes);
+          _channel!.sink.add(jsonEncode({'user_audio_chunk': b64}));
+        }
         _updateMicLevel(bytes);
       });
 
@@ -322,13 +335,10 @@ class _ConversationScreenState extends State<ConversationScreen>
       sum += sample * sample;
     }
     final rms = sqrt(sum / sampleCount) / 32768.0;
-    if (mounted) {
-      setState(() {
-        _micLevel = rms.clamp(0.0, 1.0);
-        _waveformHistory.removeAt(0);
-        _waveformHistory.add(_micLevel);
-      });
-    }
+    _micLevel = rms.clamp(0.0, 1.0);
+    _waveformHistory[_waveformIndex] = _micLevel;  // Overwrite
+    _waveformIndex = (_waveformIndex + 1) % 40;
+    if (mounted) setState(() {});  // Safe repaint
   }
 
   // ─────────────────────────────────────────────────────────────────────
@@ -438,6 +448,8 @@ class _ConversationScreenState extends State<ConversationScreen>
 
         default:
           debugPrint('WS event: $type');
+          debugPrint('Received WS: $raw');  // Log ALL messages
+
       }
     } catch (e) {
       debugPrint('Message parse error: $e');
