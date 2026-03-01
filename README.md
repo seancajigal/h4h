@@ -1,6 +1,5 @@
 # Unhooked
 
-
 ## 📝 Description
 
 Unhooked is a robust security solution dedicated to neutralizing phishing threats and 'taking the bait out of phishing' for good. Built with a high-performance Express.js backend, the platform integrates a centralized database for secure data management and features a comprehensive testing suite to ensure reliability and peak performance. By combining modern web technologies with a focus on proactive defense, h4h provides an essential framework for identifying and mitigating malicious digital deception.
@@ -157,6 +156,3 @@ Contributions are welcome! Here's how you can help:
 6. **Open** a pull request
 
 Please ensure your code follows the project's style guidelines and includes tests where applicable.
-
----
-*This README was generated with ❤️ by ReadmeBuddy*
