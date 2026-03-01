@@ -1,0 +1,4 @@
+
+module record_macos.__Swift {
+  exclude header "record_macos-Swift.h"
+}
