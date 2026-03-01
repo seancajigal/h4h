@@ -1,10 +1,2 @@
-<<<<<<< HEAD
-ocr/.venv
-.DS_Store
-=======
 .venv
-test.jpeg
-test2.jpeg
-ocr/.DS_Store
 .DS_Store
->>>>>>> parent of 58ffd3b (Merge branch 'main' of https://github.com/seancajigal/h4h)
