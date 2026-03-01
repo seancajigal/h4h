@@ -1,0 +1,5 @@
+paddleocr
+paddlepaddle
+presidio-analyzer
+presidio-anonymizer
+flask>=3.0.0
